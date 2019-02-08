@@ -69,6 +69,10 @@ class PhotoLoader{
             do {
                 let decoder = JSONDecoder()
                 let jsonData = try decoder.decode(PhotoBook.self, from: albumData)
+                if(jsonData.status != "ok"){
+                    print("Error: Status to retrieve photos is not available")
+                    return
+                }
                 completionHandler(jsonData)
             } catch  {
                 print("error trying to convert data to JSON")
@@ -80,91 +84,4 @@ class PhotoLoader{
 
 }
 
-/*
- class func load(/*jsonURL: URL*/)->PhotoBook?{
- // if Bundle.main.url(forResource: "photos", withExtension: ".json") != nil{
- let endpoint = NSURL(string: "https://dalemusser.com/code/examples/data/nocaltrip/photos.json")
- if let jsonData = NSData(contentsOf: endpoint! as URL){
- do{
- let data = try Data(contentsOf: endpoint! as URL)
- let decoder = JSONDecoder()
- let jsonData = try decoder.decode(PhotoBook.self, from: data)
- print("Parsing data testing here")
- return jsonData
- 
- 
- } catch {
- print("error:\(error)")
- }
- /*
- print("returned nil at mid")
- return nil
- }
- print("returned nil at very bot")
- return nil
- */
- }
- print("returned nil at very bot")
- return nil
- }
- */
-/*
- func makeGetCall(){
- // Set up the URL request
- let todoEndpoint: String = "https://dalemusser.com/code/examples/data/nocaltrip/photos.json"
- guard let url = URL(string: todoEndpoint) else {
- print("Error: cannot create URL")
- return
- }
- let urlRequest = URLRequest(url: url)
- 
- // set up the session
- let config = URLSessionConfiguration.default
- let session = URLSession(configuration: config)
- 
- // make the request
- let task = session.dataTask(with: urlRequest) {
- (data, response, error) in
- // check for any errors
- guard error == nil else {
- print("error calling GET on /todos/1")
- print(error!)
- return
- }
- // make sure we got data
- guard let responseData = data else {
- print("Error: did not receive data")
- return
- }
- // parse the result as JSON, since that's what the API provides
- 
- do {
- guard let todo = try Data(contentsOf: endpoint! as URL)//SONSerialization.jsonObject(with: responseData, options: [])
- as? [String: Any] else {
- print("error trying to convert data to JSON")
- return
- // }*/
 
-// now we have the todo
-// let's just print it to prove we can access it
-
-
-// the todo object is a dictionary
-// so we just access the title using the "title" key
-// so check for a title and print it if we have one
-/*
- guard let todoTitle = todo["title"] as? String else {
- print("Could not get todo title from JSON")
- return
- }
- print("The title is: " + todoTitle)
- } catch  {
- print("error trying to convert data to JSON")
- return
- }
- }
- task.resume()
- }
- 
- }
- */

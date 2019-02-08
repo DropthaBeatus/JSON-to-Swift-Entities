@@ -66,6 +66,13 @@ class PhotoLoader{
                 print("error trying to convert data to JSON")
                 return
             }
+                //this is horrible way to check status with a force unwrapped need to figure out how to type from serialization better
+                
+                let checkStatus = data["status"] as! String
+                if(checkStatus != "ok"){
+                    print("Error: status != okay. Cannot retrive JSON data")
+                    return
+                }
                 let photos = data["photos"] as! [[String: Any]]
                 var photoArr : [photosies] = []
                 for photo in photos{
